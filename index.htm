@@ -1,13 +1,62 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Snake</title>
 		<script type="text/javascript" src="jquery-1.8.2.js"></script>
 		<script type="text/javascript" src="lib.js"></script>
 		<script type="text/javascript" src="game.js"></script>
+		<style>
+		body { 
+			background: url(bg.jpg) no-repeat;
+			background-size: 1500px 650px;
+		}
+			button{ border:none; cursor:pointer; outline:none; }
+			button#playpausebtn{
+				background:url(mute.png) no-repeat;
+				width:50px;
+				height:40px;
+		500
+		</style>
+<script>
+var audio, playbtn, mutebtn, seek_bar;
+function initAudioPlayer(){
+	audio = new Audio();
+	audio.src = "sound.mp3";
+	audio.loop = true;
+	audio.play();
+	// Set object references
+	playbtn = document.getElementById("playpausebtn");
+	mutebtn = document.getElementById("mutebtn");
+	// Add Event Handling
+	playbtn.addEventListener("click",playPause);
+	mutebtn.addEventListener("click", mute);
+	// Functions
+	function playPause(){
+		if(audio.paused){
+		    audio.play();
+		    playbtn.style.background = "url(mute.png) no-repeat";
+	    } else {
+		    audio.pause();
+		    playbtn.style.background = "url(play.png) no-repeat";
+	    }
+	}
+	function mute(){
+		if(audio.muted){
+		    audio.muted = false;
+		    mutebtn.style.background = "url(images/speaker.png) no-repeat";
+	    } else {
+		    audio.muted = true;
+		    mutebtn.style.background = "url(images/speaker_muted.png) no-repeat";
+	    }
+	}
+}
+window.addEventListener("load", initAudioPlayer);
+</script>
+
 	</head>
 	<body style="text-align:center">
-	<canvas id="canvas" width="400" height="400" style="background-color:black"></canvas>
-	<p>Use arrow keys to move.</p>
-	<p>Try to eat as many food pellets as possible without hitting the square walls or yourself.</p>
+		<canvas id="canvas" width="600" height="600" style="background-color:#6B8E23"></canvas>
+<button id="playpausebtn"></button>
 	</body>
 </html>
+
